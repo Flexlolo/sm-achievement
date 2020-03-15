@@ -10,8 +10,8 @@ INCLUDES
 */
 
 #include <sourcemod>
-#include <morecolors>
 #include <lololib>
+#include <printqueue>
 
 /*
 PLUGIN INFO
@@ -103,7 +103,7 @@ stock void Achievement_Event(int client, const char[] sMessage)
 	int team = GetClientTeam(client);
 
 	char sTeam[10];
-	lolo_GetChatTeamColor(team, sTeam, sizeof(sTeam));
+	lolo_GetTeamColorString(team, sTeam, sizeof(sTeam));
 
 	QPrintToChatAll("%s%s \x01has earned the achievement \x05%s", sTeam, sName, sMessage); 
 }
