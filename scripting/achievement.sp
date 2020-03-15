@@ -30,6 +30,12 @@ public Plugin myinfo =
 GLOBAL VARIABLES
 */
 
+#define CONSOLE_ACHIEVEMENTS 			"[Achievements]"
+#define CHAT_ACHIEVEMENTS 				"\x072f4f4f[\x07ff6347Achievements\x072f4f4f]"
+#define CHAT_VALUE 						"\x07ff6347"
+#define CHAT_SUCCESS 					"\x07FFC0CB"
+#define CHAT_ERROR 						"\x07DC143C"
+
 /*
 NATIVES AND FORWARDS
 */
@@ -61,7 +67,14 @@ public Action Command_Achievement(int client, int args)
 			{
 				if (hTargets.Length == 0)
 				{
-					CPrintToChat(client, "{darkslategrey}[{tomato}Achievements{darkslategrey}]: {crimson}Invalid target");
+					if (client)
+					{
+						QPrintToChat(client, "%s %sInvalid target", CHAT_ACHIEVEMENTS, CHAT_ERROR);
+					}
+					else
+					{
+						PrintToServer("%s Invalid target", CONSOLE_ACHIEVEMENTS);
+					}
 				}
 				else
 				{
@@ -92,5 +105,5 @@ stock void Achievement_Event(int client, const char[] sMessage)
 	char sTeam[10];
 	lolo_GetChatTeamColor(team, sTeam, sizeof(sTeam));
 
-	CPrintToChatAll("%s%s \x01has earned the achievement \x05%s", sTeam, sName, sMessage); 
+	QPrintToChatAll("%s%s \x01has earned the achievement \x05%s", sTeam, sName, sMessage); 
 }
